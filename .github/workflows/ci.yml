@@ -97,6 +97,7 @@ jobs:
                   raw_dir=raw, processed_dir=root / "processed", offline=True,
               )
               assert result.prices.shape == (4, 3), result.prices.shape
-              assert (result.prices == 100.0).any()
+              assert (result.indices.iloc[0] == 100.0).all()
+              assert result.returns.notna().any().all()
               print("Pipeline hors ligne OK :", result.prices.shape)
           PY
