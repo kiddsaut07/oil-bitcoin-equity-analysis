@@ -1,0 +1,37 @@
+[project]
+name = "oil-bitcoin-equity-analysis"
+version = "0.1.0"
+description = "Educational time-series comparison of WTI, Bitcoin and the S&P 500"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.1,<3.0",
+    "numpy>=1.26,<3.0",
+    "matplotlib>=3.8,<4.0",
+    "jupyter>=1.0,<2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0,<9.0",
+    "ruff>=0.6,<1.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# Le notebook ajuste sys.path puis importe src/ : E402 est attendu.
+# Les cellules markdown longues n'ont pas à respecter la largeur de ligne.
+"notebooks/*.ipynb" = ["E402", "E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Tests et qualité (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Contrôle statique (ruff)
+        run: |
+          ruff check .
+          ruff format --check .
+
+      - name: Tests unitaires (sans réseau)
+        run: python -m pytest -v
+
+  pipeline-offline:
+    name: Pipeline hors ligne (reproductibilité)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Vérifier le mode hors ligne sur données synthétiques
+        run: |
+          python - <<'PY'
+          import json
+          import tempfile
+          from pathlib import Path
+
+          import pandas as pd
+
+          from src import pipeline
+
+          with tempfile.TemporaryDirectory() as workspace:
+              root = Path(workspace)
+              raw = root / "raw"
+              dates = pd.to_datetime(
+                  ["2024-01-02", "2024-01-03", "2024-01-04", "2024-01-05"]
+              )
+              values = {
+                  "WTI": [70.0, 71.5, 69.0, 72.0],
+                  "BTC_USD": [45000.0, 46000.0, 44000.0, 47000.0],
+                  "SP500": [4700.0, 4720.0, 4680.0, 4750.0],
+              }
+              for asset, series in values.items():
+                  raw.mkdir(parents=True, exist_ok=True)
+                  pd.DataFrame({"date": dates, "close": series}).to_csv(
+                      raw / f"{asset}.csv", index=False
+                  )
+                  (raw / f"{asset}_metadata.json").write_text(
+                      json.dumps({"asset": asset, "provider": "fixture CI"}),
+                      encoding="utf-8",
+                  )
+              result = pipeline.run_pipeline(
+                  "2024-01-01", "2024-12-31",
+                  raw_dir=raw, processed_dir=root / "processed", offline=True,
+              )
+              assert result.prices.shape == (4, 3), result.prices.shape
+              assert (result.prices == 100.0).any()
+              print("Pipeline hors ligne OK :", result.prices.shape)
+          PY

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="Oil, Bitcoin and Equity Market Analysis">
+  <rect width="1200" height="300" rx="24" fill="#0B2545"/>
+  <rect x="0" y="0" width="1200" height="8" rx="4" fill="#F7931A"/>
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="2">
+    <line x1="700" y1="0" x2="700" y2="300"/><line x1="800" y1="0" x2="800" y2="300"/>
+    <line x1="900" y1="0" x2="900" y2="300"/><line x1="1000" y1="0" x2="1000" y2="300"/>
+    <line x1="1100" y1="0" x2="1100" y2="300"/><line x1="700" y1="100" x2="1200" y2="100"/>
+    <line x1="700" y1="200" x2="1200" y2="200"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-width="7">
+    <path d="M720 232 L780 190 L840 210 L900 150 L960 170 L1020 120 L1080 140 L1160 72" stroke="#3D7EBF"/>
+    <path d="M720 262 L780 244 L840 256 L900 206 L960 222 L1020 176 L1080 192 L1160 128" stroke="#0F9D58"/>
+    <path d="M720 196 L780 166 L840 182 L900 112 L960 134 L1020 74 L1080 92 L1160 40" stroke="#F7931A"/>
+  </g>
+  <rect x="64" y="66" width="86" height="10" rx="5" fill="#F7931A"/>
+  <text x="64" y="140" font-family="Segoe UI, DejaVu Sans, Helvetica, sans-serif" font-size="44" font-weight="700" fill="#FFFFFF">Oil, Bitcoin &amp; Equity</text>
+  <text x="64" y="190" font-family="Segoe UI, DejaVu Sans, Helvetica, sans-serif" font-size="44" font-weight="700" fill="#FFFFFF">Market Analysis</text>
+  <text x="64" y="232" font-family="Segoe UI, DejaVu Sans, Helvetica, sans-serif" font-size="17" fill="#A9C4DE">WTI · BTC/USD · S&amp;P 500 — analyse comparative reproductible sur 2020-2025</text>
+</svg>

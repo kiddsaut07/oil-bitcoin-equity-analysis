@@ -1,0 +1,7 @@
+# Initial compatibility ranges; validate and lock versions in the target environment.
+pandas>=2.1,<3.0
+numpy>=1.26,<3.0
+matplotlib>=3.8,<4.0
+jupyter>=1.0,<2.0
+pytest>=8.0,<9.0
+ruff>=0.6,<1.0

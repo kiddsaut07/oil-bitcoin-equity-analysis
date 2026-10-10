@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Logo Oil, Bitcoin and Equity Market Analysis">
+  <rect width="512" height="512" rx="112" fill="#0B2545"/>
+  <g stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="4" stroke-linecap="round">
+    <line x1="104" y1="200" x2="408" y2="200"/>
+    <line x1="104" y1="288" x2="408" y2="288"/>
+    <line x1="104" y1="376" x2="408" y2="376"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="20">
+    <path d="M112 336 L176 288 L240 312 L304 232 L368 256 L400 208" stroke="#3D7EBF"/>
+    <path d="M112 376 L176 352 L240 368 L304 280 L368 304 L400 256" stroke="#0F9D58"/>
+    <path d="M112 288 L176 248 L240 264 L304 152 L368 184 L400 120" stroke="#F7931A"/>
+  </g>
+  <circle cx="400" cy="120" r="30" fill="#0B2545"/>
+  <circle cx="400" cy="120" r="20" fill="#F7931A"/>
+  <rect x="112" y="416" width="140" height="14" rx="7" fill="#F7931A"/>
+  <rect x="266" y="416" width="62" height="14" rx="7" fill="#0F9D58"/>
+  <rect x="342" y="416" width="58" height="14" rx="7" fill="#3D7EBF"/>
+</svg>
